@@ -1,6 +1,7 @@
 import bot from "./assets/bot.svg";
 import user from "./assets/user.svg";
 
+const url = 'https://openai-kvov.onrender.com/'
 const form = document.querySelector("form");
 const chatContainer = document.querySelector("#chat_container");
 
@@ -76,7 +77,7 @@ async function handleSubmit(e) {
   loader(messageDiv);
 
   // fetch data from server
-  const response = await fetch("http://localhost:5000", {
+  const response = await fetch('http://localhost:5000/', {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -92,6 +93,7 @@ async function handleSubmit(e) {
     typeText(messageDiv,parsedData);
   }else{
     const err = await response.text();
+    console.log(err);
     messageDiv.innerHTML = "Something went wrong!";
     alert(err);
   }
