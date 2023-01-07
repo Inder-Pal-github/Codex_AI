@@ -5,7 +5,7 @@ const cors = require("cors");
 const { Configuration, OpenAIApi } = require("openai");
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEYTWO,
 });
 
 const openai = new OpenAIApi(configuration);
@@ -22,6 +22,7 @@ app.get("/", async (req, res) => {
 app.post("/", async (req, res) => {
   try {
     const prompt = req.body.prompt;
+
     const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `${prompt}`,
@@ -33,7 +34,6 @@ app.post("/", async (req, res) => {
     });
     res.status(200).send({ bot: response.data.choices[0].text });
   } catch (error) {
-    console.log(error.message);
     res.status(500).send({ message: error.message });
   }
 });
